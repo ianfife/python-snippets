@@ -5,4 +5,9 @@ def sum_of_letters(word):
         value += letters.index(char) + 1
     return value
 
-print(sum_of_letters("hello"))
+main = "y"
+
+while(main.lower() == "y"):
+    word = input("Enter a word: ")
+    print("The word " + word + " has a value of " + str(sum_of_letters(word)))
+    main = input("Would you like to enter another word? (Y/N) ")
