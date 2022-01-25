@@ -32,10 +32,12 @@ while choice.lower() != "encrypt" or "decrypt":
         message = input("Enter text: ")
         shift = int(input("Enter shift: "))
         shiftedChars = ceasar_encrypt()
-    elif choice.lower == "decrypt":
+        break
+    elif choice.lower() == "decrypt":
         message = input("Enter text: ")
         shift = int(input("Enter shift: "))
         shiftedChars = ceasar_decrypt()
+        break
     else:
         print("Incorrect value. You must enter Encrypt or Decrypt.")
         choice = input("Do you want to encrypt or decrypt? Type \"Encrypt\" to encrypt and \"Decrypt\" to decrypt.\n")
