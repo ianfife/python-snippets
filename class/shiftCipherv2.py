@@ -19,8 +19,8 @@ def shift_cipherv2():
                     #Add the shift
                     index += int(shift)
                     #Wrap around
-                    while index > len(symbols):
-                        index -= len(symbols)
+                    while index >= len(symbols):
+                        index -= len(symbols)-1
                     #Convert back to a character and append to the new message
                     translated_message += symbols[index]
                 else:
@@ -40,7 +40,7 @@ def shift_cipherv2():
                     index -= int(shift)
                     #Wrap around
                     while index < 1:
-                        index += len(symbols)
+                        index += len(symbols)-1
                     #Convert back to a character and append to the new message
                     translated_message += symbols[index]
                 else:
