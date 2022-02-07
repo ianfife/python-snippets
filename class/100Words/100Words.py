@@ -1,5 +1,6 @@
 #Ian Fife
 #This program converts a list of words to values and then finds all the words that have a value of 100.
+import random
 
 def sum_of_letters(word):
     letters = "abcdefghijklmnopqrstuvwxyz"
@@ -24,6 +25,8 @@ for line in dictionary:
 
 dictionary.close()
 
-print("The words with a value of 100 are: " + str(words_100))
+print("There were " + str(len(words_100)) + " words found in the dictionary with a value of 100.")
+for i in range(10):
+    print(random.choice(words_100))
 
 end = input()
