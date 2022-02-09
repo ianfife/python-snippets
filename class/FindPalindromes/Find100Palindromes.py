@@ -43,7 +43,7 @@ dictionary = open('dictionary.txt', 'r')
 for line in dictionary:
     #Get each line and strip the newline from the word
     currentWord = line.lower().strip()
-    if isPalindrome(currentWord) and sum_of_letters(currentWord) == 100:
+    if isPalindrome(currentWord) and (sum_of_letters(currentWord) == 100):
         words_palindrome_100.append(currentWord)
                         
 
