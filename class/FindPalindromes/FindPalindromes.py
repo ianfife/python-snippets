@@ -1,6 +1,5 @@
 #Ian Fife
 #This program finds palindromes from a list of words.
-import random
 
 def isPalindrome(word):
     palindrome = True
