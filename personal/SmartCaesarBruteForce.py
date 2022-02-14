@@ -1,30 +1,31 @@
 #Ian Fife
 #Caesar Cipher Code Breaker -- brute forces all possible decryptions of an encrypted message
 
-def match_message(message):
-    word_list = []
-    word_strength = 0
-
-    dictionary = open("dictionary.txt", "r")
-
-    temp = ""
-    for char in message.lower():
-        if char == " ":
-            word_list.append(temp)
-            temp = ""
-        elif not(char == "!" or char == "?" or char == "."):
-            temp += char
-    word_list.append(temp)
-
-    for line in dictionary:
-        currentWord = line.lower().strip()
-        if currentWord in word_list:
-            word_strength += 1
-    return float(word_strength / len(word_list))
-
 def caesar_breaker():
     #Global symbol set
     symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.'
+
+    def match_message(message):
+        word_list = []
+        word_strength = 0
+
+        dictionary = open("dictionary.txt", "r")
+
+        temp = ""
+        for char in message.lower():
+            if char == " ":
+                word_list.append(temp)
+                temp = ""
+            elif not(char == "!" or char == "?" or char == ".") and char in symbols:
+                temp += char
+        word_list.append(temp)
+
+        for line in dictionary:
+            currentWord = line.lower().strip()
+            if currentWord in word_list:
+                word_strength += 1
+        
+        return float(word_strength / len(word_list))
 
     message = input("Enter Encrypted Message: ")
     messages = []
