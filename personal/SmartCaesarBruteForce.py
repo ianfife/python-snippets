@@ -11,15 +11,11 @@ def caesar_breaker():
 
         dictionary = open("dictionary.txt", "r")
 
-        temp = ""
-        for char in message.lower():
-            if char == " ":
-                word_list.append(temp)
-                temp = ""
-            elif not(char == "!" or char == "?" or char == ".") and char in symbols:
-                temp += char
-        word_list.append(temp)
-
+        temp_message = message.lower().replace("! ", " ").replace("? ", " ").replace(". ", " ")
+        if temp_message[-1] == "!" or temp_message[-1] == "?" or temp_message[-1] == ".":
+            temp_message = temp_message[0:len(temp_message)-1]
+        word_list = temp_message.split(" ")
+        
         for line in dictionary:
             currentWord = line.lower().strip()
             if currentWord in word_list:
@@ -29,7 +25,7 @@ def caesar_breaker():
 
     message = input("Enter Encrypted Message: ")
     messages = []
-    for i in range(1, len(symbols)):
+    for i in range(0, len(symbols)):
         translated_message = ""
         for char in message:
             #Test if symbols contains the character to see if we can encrypt it
@@ -39,8 +35,8 @@ def caesar_breaker():
                 #Subtract the shift
                 index -= int(i)
                 #Wrap around
-                while index < 1:
-                    index += len(symbols)-1
+                while index < 0:
+                    index += len(symbols)
                 #Convert back to a character and append to the new message
                 translated_message += symbols[index]
             else:
@@ -49,16 +45,21 @@ def caesar_breaker():
     highest_value = 0.0
     highest_word = ""
     message_value = 0.0
+    ordered_messages = []
+    ordered_values = []
     for message in messages:
         message_value = match_message(message)
+        ordered_messages.append(message)
+        ordered_values.append(message_value)
         if message_value >= highest_value:
             highest_value = message_value
             highest_word = message
     print("The decrypted message is most likely to be \"" + highest_word + "\" with a value of " + str(highest_value))
 
     if input("Would you like to see the rest of the decryptions? [y] or [n]: ") == "y":
-        for message in messages:
-            print(message)
+        zipped = sorted(zip(ordered_values, ordered_messages))
+        for value, message in zipped:
+            print(message, value)
     
 print("Welcome to the Smart Caesar Cipher Code Breaker Program!")
 print("This program will try every possible key to decrypt the message, then attempt to tell you which one is likely to be the true message.")
