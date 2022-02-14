@@ -9,7 +9,7 @@ def caesar_breaker():
         word_list = []
         word_strength = 0
 
-        dictionary = open("dictionary.txt", "r")
+        dictionary = open("largeDictionary.txt", "r")
 
         temp_message = message.lower().replace("! ", " ").replace("? ", " ").replace(". ", " ")
         if temp_message[-1] == "!" or temp_message[-1] == "?" or temp_message[-1] == ".":
