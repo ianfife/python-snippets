@@ -12,6 +12,12 @@ def caesar_breaker():
         dictionary = open("largeDictionary.txt", "r")
 
         temp_message = message.lower().replace("! ", " ").replace("? ", " ").replace(". ", " ")
+
+        bad_chars = []
+        for char in temp_message:
+            if char not in symbols:
+                temp_message = temp_message.replace(char, "")
+
         if temp_message[-1] == "!" or temp_message[-1] == "?" or temp_message[-1] == ".":
             temp_message = temp_message[0:len(temp_message)-1]
         word_list = temp_message.split(" ")
@@ -54,7 +60,7 @@ def caesar_breaker():
         if message_value >= highest_value:
             highest_value = message_value
             highest_word = message
-    print("The decrypted message is most likely to be \"" + highest_word + "\" with a value of " + str(highest_value))
+    print("The decrypted message is most likely to be \"" + highest_word + "\" with a value of " + str(round(highest_value, 4)))
 
     if input("Would you like to see the rest of the decryptions? [y] or [n]: ") == "y":
         zipped = sorted(zip(ordered_values, ordered_messages))
