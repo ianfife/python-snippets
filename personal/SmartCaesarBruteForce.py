@@ -19,7 +19,7 @@ def caesar_breaker():
         for line in dictionary:
             currentWord = line.lower().strip()
             if currentWord in word_list:
-                word_strength += 1
+                word_strength += word_list.count(currentWord)
         
         return float(word_strength / len(word_list))
 
@@ -59,7 +59,7 @@ def caesar_breaker():
     if input("Would you like to see the rest of the decryptions? [y] or [n]: ") == "y":
         zipped = sorted(zip(ordered_values, ordered_messages))
         for value, message in zipped:
-            print(message, value)
+            print(message, round(value, 4))
     
 print("Welcome to the Smart Caesar Cipher Code Breaker Program!")
 print("This program will try every possible key to decrypt the message, then attempt to tell you which one is likely to be the true message.")
