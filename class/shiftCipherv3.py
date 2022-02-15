@@ -21,12 +21,16 @@ def shiftCipher():
         # First - copy the pass phrase to remove spaces and repeats
         new_passphrase = ""
         for char in passPhrase:
+            # Only adds a character to the modified passphrase if it is in the
+            # symbol set AND if it does not already exist in the modified passphrase.
             if char in symbols and not char in new_passphrase:
                 new_passphrase += char
         
         # Second - remove all the matching characters from the symbol set
         new_symbols = ""
         for char in symbols:
+            # Test if the passphrase contains each character in symbols,
+            # do not add to the new symbols if true.
             if not char in new_passphrase:
                 new_symbols += char
         symbols = new_symbols
