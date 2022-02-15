@@ -27,6 +27,8 @@ def caesar_breaker():
             if currentWord in word_list:
                 word_strength += word_list.count(currentWord)
         
+        dictionary.close()
+        
         return float(word_strength / len(word_list))
 
     message = input("Enter Encrypted Message: ")
