@@ -9,12 +9,13 @@
 def baconian_cipher():
     # Symbol set
     symbols = {
-        "A" : "AAAAA", "B" : "AAAAB", "C" : "AAABA", "D" : "AAABB",
-        "E" : "AABAA", "F" : "AABAB", "G" : "AABBA", "H" : "AABBB",
-        "I" : "ABAAA", "K" : "ABAAB", "L" : "ABABA", "M" : "ABABB",
-        "N" : "ABBAA", "O" : "ABBAB", "P" : "ABBBA", "Q" : "ABBBB",
-        "R" : "BAAAA", "S" : "BAAAB", "T" : "BAABA", "U" : "BAABB",
-        "W" : "BABAA", "X" : "BABAB", "Y" : "BABBA", "Z" : "BABBB"
+        "A" : "aaaaa", "B" : "aaaab", "C" : "aaaba", "D" : "aaabb",
+        "E" : "aabaa", "F" : "aabab", "G" : "aabba", "H" : "aabbb",
+        "I" : "abaaa", "J" : "abaab", "K" : "ababa", "L" : "ababb",
+        "M" : "abbaa", "N" : "abbab", "O" : "abbba", "P" : "abbbb",
+        "Q" : "baaaa", "R" : "baaab", "S" : "baaba", "T" : "baabb",
+        "U" : "babaa", "V" : "babab", "W" : "babba", "X" : "babbb",
+        "Y" : "bbaaa", "Z" : "bbaab"
     }
 
     message = input("\nEnter Message: ")
@@ -24,24 +25,33 @@ def baconian_cipher():
         # Encrypt
         if mode == "e":
             encryption_message = input("\nEnter Encryption Message: ")
-            while len(encryption_message) < len(message) * 5:
-                print("\nYour encryption message must be at least " + str(len(message)*5) + " characters long. Try again.")
-                encryption_message = input("\nEnter Encryption Message: ")
+            min_length = 0
+            for char in message:
+                if char.upper() in symbols.keys():
+                    min_length += 5
+            while len(encryption_message) < min_length:
+                print("\nYour encryption message must be at least " + str(min_length) + " characters long. Try again.")
+                encryption_message = ""
+                encryption_message = input("\nEnter Encryption Message (or press enter to use default option): ")
+                if encryption_message == "":
+                    while len(encryption_message) < min_length:
+                        encryption_message += "stock"
             new_message = ""
             for char in message:
                 # Convert each character into a value using the dictionary
-                new_message += symbols[char]
+                if char.upper() in symbols.keys():
+                    new_message += symbols[char.upper()]
             
             new_encryption_message = ""
             i = 0
             for char in new_message:
-                # Account for spaces
-                while encryption_message[i] == " ":
-                    new_encryption_message += " "
+                # Account for unsupported characters
+                while encryption_message[i].upper() not in symbols.keys():
+                    new_encryption_message += encryption_message[i]
                     i += 1
                 # Make the character in the new message lowercase if the
                 # parallel value is an A, and make it uppercase for B
-                if char == "A":
+                if char == "a":
                     new_encryption_message += encryption_message[i].lower()
                 else:
                     new_encryption_message += encryption_message[i].upper()
@@ -56,15 +66,15 @@ def baconian_cipher():
             new_message = ""
             new_key = ""
             for char in message:
-                # Account for spaces
-                if char == " ":
+                # Account for unsupported characters
+                if char.upper() not in symbols.keys():
                     pass
-                # Add an A for lowercase letters
+                # Add an a for lowercase letters
                 elif char.islower():
-                    new_key += "A"
-                # Add a B for upercase letters
+                    new_key += "a"
+                # Add a b for upercase letters
                 else:
-                    new_key += "B"
+                    new_key += "b"
             # Loop through the new key in increments of 5, extracting
             # 5 characters at a time, and converting those back into
             # characters by reversing the original dictionary.
