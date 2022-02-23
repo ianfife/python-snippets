@@ -20,22 +20,45 @@ def baconian_cipher():
 
     message = input("\nEnter Message: ")
     mode = ""
+
     while mode != "e" and mode != "d":
         mode = input("\nChoose [e] encrypt or [d] decrypt: ")
+
         # Encrypt
         if mode == "e":
             encryption_message = input("\nEnter Encryption Message: ")
             min_length = 0
+
+            # Get the minimum length by testing for supported characters
+            # and adding 5 for each one.
             for char in message:
                 if char.upper() in symbols.keys():
                     min_length += 5
-            while len(encryption_message) < min_length:
+
+            # Verify that the "outer message" is long enough.
+            encryption_message_length = 0
+            for char in encryption_message:
+                if char in symbols.keys():
+                    encryption_message_length += 1
+                    
+            # Error handling if the length is not enough.
+            while encryption_message_length < min_length:
+                encryption_message_length = 0
                 print("\nYour encryption message must be at least " + str(min_length) + " characters long. Try again.")
                 encryption_message = ""
                 encryption_message = input("\nEnter Encryption Message (or press enter to use default option): ")
+                
+                # Default option
                 if encryption_message == "":
-                    while len(encryption_message) < min_length:
-                        encryption_message += "stock"
+                    while encryption_message_length < min_length:
+                        encryption_message += "stock "
+                        encryption_message_length += 5
+                
+                else:
+                    # Calculate length again
+                    for char in encryption_message:
+                        if char in symbols.keys():
+                            encryption_message_length += 1
             new_message = ""
             for char in message:
                 # Convert each character into a value using the dictionary
@@ -52,35 +75,42 @@ def baconian_cipher():
                 # Make the character in the new message lowercase if the
                 # parallel value is an A, and make it uppercase for B
                 if char == "a":
-                    new_encryption_message += encryption_message[i].lower()
-                else:
                     new_encryption_message += encryption_message[i].upper()
+                else:
+                    new_encryption_message += encryption_message[i].lower()
                 i += 1
             
+            # Print out results
             print("\nOriginal Message: " + message)
             print("Encryption Key: " + new_message)
             print("Original Encrypt Message: " + encryption_message)
             print("Encrypted Message: " + new_encryption_message)
+
         # Decrypt
         elif mode == "d":
             new_message = ""
             new_key = ""
+
             for char in message:
                 # Account for unsupported characters
                 if char.upper() not in symbols.keys():
                     pass
-                # Add an a for lowercase letters
+                # Add a b for lowercase letters
                 elif char.islower():
-                    new_key += "a"
-                # Add a b for upercase letters
-                else:
                     new_key += "b"
+                # Add an a for uppercase letters
+                else:
+                    new_key += "a"
+
             # Loop through the new key in increments of 5, extracting
             # 5 characters at a time, and converting those back into
             # characters by reversing the original dictionary.
             for i in range(5, len(new_key)+5, 5):
+                if len(new_key[i-5:i]) < 5:
+                    break
                 new_message += dict(map(reversed, symbols.items()))[new_key[i-5:i]]
 
+            # Print out results
             print("\nOriginal Message: " + message)
             print("Decryption Key: " + new_key)
             print("Decrypted Message: " + new_message)
@@ -90,8 +120,9 @@ def baconian_cipher():
 # -- Main --
 
 print("Welcome to the Baconian Cipher Program!")
-run = ""
+print("\nYour 'inner' message will be hidden in an 'outer' message that is at least 5 times longer than the inner.")
 
+run = ""
 while run != "q":
     baconian_cipher()
     print("\n---------------------------------------")
