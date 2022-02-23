@@ -59,7 +59,7 @@ def baconian_cipher():
                     for char in encryption_message:
                         if char in symbols.keys():
                             encryption_message_length += 1
-                            
+
             new_message = ""
             for char in message:
                 # Convert each character into a value using the dictionary
@@ -73,8 +73,8 @@ def baconian_cipher():
                 while encryption_message[i].upper() not in symbols.keys():
                     new_encryption_message += encryption_message[i]
                     i += 1
-                # Make the character in the new message lowercase if the
-                # parallel value is an A, and make it uppercase for B
+                # Make the character in the new message uppercase if the
+                # parallel value is an A, and make it lowercase for B
                 if char == "a":
                     new_encryption_message += encryption_message[i].upper()
                 else:
