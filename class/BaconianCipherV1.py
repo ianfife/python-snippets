@@ -59,7 +59,6 @@ def baconian_cipher():
                     for char in encryption_message:
                         if char.upper() in symbols.keys():
                             encryption_message_length += 1
-                    print(encryption_message_length)
 
             new_message = ""
             for char in message:
