@@ -38,7 +38,7 @@ def baconian_cipher():
             # Verify that the "outer message" is long enough.
             encryption_message_length = 0
             for char in encryption_message:
-                if char in symbols.keys():
+                if char.upper() in symbols.keys():
                     encryption_message_length += 1
                     
             # Error handling if the length is not enough.
@@ -57,8 +57,9 @@ def baconian_cipher():
                 else:
                     # Calculate length again
                     for char in encryption_message:
-                        if char in symbols.keys():
+                        if char.upper() in symbols.keys():
                             encryption_message_length += 1
+                    print(encryption_message_length)
 
             new_message = ""
             for char in message:
