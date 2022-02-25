@@ -1,4 +1,4 @@
-def ceasar_shift(message, shift):
+def caesar_shift(message, shift):
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     new_message = ''
     message = message.lower()
@@ -10,4 +10,4 @@ def ceasar_shift(message, shift):
     return new_message
 
 
-print(ceasar_shift("Hello World", 2))
+print(caesar_shift("Hello World", 2))

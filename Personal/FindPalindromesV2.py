@@ -2,9 +2,7 @@
 #This program finds palindromes from a list of words.
 
 def isPalindrome(word):
-    if word == word[::-1]:
-        return True
-    return False
+    return word == word[::-1]
 
 words_palindrome = []
 
