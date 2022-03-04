@@ -32,15 +32,26 @@ value_list = [
 ]
 
 def homophone_encrypt():
-    msg = input("Enter Message: ").lower()
+    msg = input("\nEnter Message: ").lower()
     message_encrypt = ""
     for char in msg:
         if char in char_list:
             row_val = char_list.index(char)
             hold_var = random.choice(value_list[row_val])
             message_encrypt += hold_var
-    print("Original Message: " + msg)
-    print("Encrypted Message: " + message_encrypt)
+    print("\nOriginal Message: " + msg)
+    print("\nEncrypted Message: " + message_encrypt)
+
+def homophone_decrypt():
+    msg = input("\nEnter Message: ")
+    message_decrypt = ""
+    for i in range(0, len(msg), 2):
+        for row in range(len(value_list)):
+            if msg[i:i+2] in value_list[row]:
+                message_decrypt += char_list[row]
+    
+    print("\nOriginal Message: " + msg)
+    print("\nDecrypted Message: " + message_decrypt)
 
 def homophone_cipher():
     mode = input("\nEnter [e] for encrypt or [d] for decrypt: ").lower()
@@ -50,8 +61,7 @@ def homophone_cipher():
     if mode == 'e':
         homophone_encrypt()
     else:
-        pass
-        #homophone_decrypt()
+        homophone_decrypt()
 
 ## -- Main --
 
@@ -64,5 +74,5 @@ while run != "q":
     run = input("Press ENTER to continue, 'q' to quit: ")
     print("---------------------------------------")
 
-print("\nThanks for using the Baconian Cipher Program!")
+print("\nThanks for using the Homophone Cipher Program!")
 end = input()
