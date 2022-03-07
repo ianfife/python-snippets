@@ -1,5 +1,14 @@
+# Ian Fife
+# 3/7/2022
+
+# Homophone Cipher
+# This program encrypts and decrypts messages using the homophone
+# cipher. Symbols are defined with a group of correlating values
+# in order to counter frequency analysis.
+
 import random
 
+# Symbol set and corresponding data
 char_list = "abcdefghijklmnopqrstuvwxyz"
 
 value_list = [
@@ -34,26 +43,38 @@ value_list = [
 def homophone_encrypt():
     msg = input("\nEnter Message: ").lower()
     message_encrypt = ""
+    
     for char in msg:
+        # Supported characters
         if char in char_list:
+            # Get the row of the 2d array
             row_val = char_list.index(char)
+            # Pick a random value from the row
             hold_var = random.choice(value_list[row_val])
+            # Add the random value to the encrypt string
             message_encrypt += hold_var
+    
     print("\nOriginal Message: " + msg)
     print("\nEncrypted Message: " + message_encrypt)
 
 def homophone_decrypt():
     msg = input("\nEnter Message: ")
     message_decrypt = ""
+    
+    # Loop through the message 2 letters at a time
     for i in range(0, len(msg), 2):
         for row in range(len(value_list)):
+            # Supported values
             if msg[i:i+2] in value_list[row]:
+                # Add corresponding value to the decrypt string
                 message_decrypt += char_list[row]
     
     print("\nOriginal Message: " + msg)
     print("\nDecrypted Message: " + message_decrypt)
 
+# Main function -- gets the mode from the user and calls encrypt or decrypt
 def homophone_cipher():
+    # Get and validate mode
     mode = input("\nEnter [e] for encrypt or [d] for decrypt: ").lower()
     while mode not in ['e', 'd']:
         mode = input("\n --Invalid Input-- Enter [e] for encrypt or [d] for decrypt: ").lower()
