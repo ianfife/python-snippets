@@ -39,8 +39,10 @@ values = ["00", "01", "02", "03", "04", "05",
 def homophone_encrypt():
     
     def write_header():
-        keys_copy = keys
-        values_copy = values
+        keys_copy = list(map(list, keys))
+        values_copy = []
+        for val in values:
+            values_copy.append(val)
         
         # Loop through each row
         for row in keys_copy:
@@ -56,10 +58,10 @@ def homophone_encrypt():
 
     
     msg = input("\nEnter Message: ").lower()
-    keys_copy = write_header()
+    keys_modified = write_header()
     message_encrypt = ""
     
-    for row in keys_copy:
+    for row in keys_modified:
         for val in row:
             message_encrypt += val
     
@@ -71,7 +73,8 @@ def homophone_encrypt():
             # Pick a random value from the row
             hold_var = random.choice(keys[row_val])
             # Add the random value to the encrypt string
-            message_encrypt += hold_var
+            print(hold_var)
+            message_encrypt += str(hold_var)
     
     print("\nOriginal Message: " + msg)
     print("\nEncrypted Message: " + message_encrypt)
@@ -79,7 +82,7 @@ def homophone_encrypt():
 def homophone_decrypt():
     
     def read_header(msg):
-        keys_copy = keys
+        keys_copy = list(map(list, keys))
         position = 0
         
         # Loop through each row
@@ -97,19 +100,17 @@ def homophone_decrypt():
     msg = input("\nEnter Message: ")
     message_decrypt = ""
 
-    keys_copy = read_header(msg)
-    keys_copy_length = 0
+    keys_modified = read_header(msg)
+    keys_modified_length = 0
     
-    for row in keys_copy:
-        keys_copy_length += len(row)
-
-    print(keys_copy)
+    for row in keys_modified:
+        keys_modified_length += len(row)
     
     # Loop through the message 2 letters at a time
-    for i in range(keys_copy_length, len(msg), 2):
-        for row in range(len(keys_copy)):
+    for i in range(keys_modified_length, len(msg), 2):
+        for row in range(len(keys_modified)):
             # Supported values
-            if msg[i:i+2] in keys_copy[row]:
+            if msg[i:i+2] in keys_modified[row]:
                 # Add corresponding value to the decrypt string
                 message_decrypt += symbols[row]
     
