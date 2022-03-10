@@ -92,10 +92,16 @@ def homophone_cipher():
 
 ## -- Main --
 
-print("Welcome to the Homophone Cipher Program!")
+print("Welcome to the Homophone Cipher machine!")
 
 # Create the key list for this session
 create_keys()
+
+# Print generated key set
+print("\nHere are the randomized bin values for your cipher text:\n")
+for char in symbols:
+    print(char.upper() + ":\t" + str(keys[symbols.index(char)]))
+
 run = ""
 while run != "q":
     homophone_cipher()
