@@ -19,6 +19,15 @@ This program finds palindromes from a list of words.
 ## [Find 100 Palindromes](https://github.com/ianfife/python-snippets/blob/main/Class/FindPalindromes/Find100Palindromes.py)
 This program finds palindromes from a list of words, and tests if any of them have a value of 100.
 
+## [Homophonic Cipher V1](https://github.com/ianfife/python-snippets/blob/main/Class/HomophonicCipherV1.py)
+This program uses the homophonic cipher to encrypt and decrypt messages, given corresponding data to counter frequency analysis.
+
+## [Homophonic Cipher V2](https://github.com/ianfife/python-snippets/blob/main/Class/HomophoneCipherV2.py)
+This program improves on V1 by randomizing the key set that corresponds with the symbol set.
+
+## [Homophonic Cipher V3](https://github.com/ianfife/python-snippets/blob/main/Class/HomophoneCipherV3.py)
+This program improves on V2 by making it possible to persist the randomly generated key set.
+
 ## [Money Words](https://github.com/ianfife/python-snippets/blob/main/Class/MoneyWords.py)
 This program converts a list of words to values and then finds the word with thte biggest value.
 
@@ -26,10 +35,10 @@ This program converts a list of words to values and then finds the word with tht
 This program performs both encryption and decryption with a key 2 rail cipher.
 
 ## [Shift Cipher V1 Decrypt](https://github.com/ianfife/python-snippets/blob/main/Class/ShiftCipherV1/ShiftCipherV1Decrypt.py)
-This program decrypts shift ciphers.
+This program decrypts messages with a simple shift cipher.
 
 ## [Shift Cipher V1 Encrypt](https://github.com/ianfife/python-snippets/blob/main/Class/ShiftCipherV1/ShiftCipherV1Encrypt.py)
-This program encrypts shift ciphers.
+This program encrypts messages with a simple shift cipher.
 
 ## [Shift Cipher V1 Full](https://github.com/ianfife/python-snippets/blob/main/Class/ShiftCipherV1/ShiftCipherV1Full.py)
 This program both encrypts and decrypts shift ciphers.
