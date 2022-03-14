@@ -36,6 +36,7 @@ values = ["00", "01", "02", "03", "04", "05",
             "90", "91", "92", "93", "94", "95",
             "96", "97", "98", "99"]
 
+
 def homophone_encrypt():
     
     def write_header():
@@ -60,7 +61,8 @@ def homophone_encrypt():
     msg = input("\nEnter Message: ").lower()
     keys_modified = write_header()
     message_encrypt = ""
-    
+
+    # Write header into encrypted message
     for row in keys_modified:
         for val in row:
             message_encrypt += val
@@ -71,13 +73,13 @@ def homophone_encrypt():
             # Get the row of the 2d array
             row_val = symbols.index(char)
             # Pick a random value from the row
-            hold_var = random.choice(keys[row_val])
+            hold_var = random.choice(keys_modified[row_val])
             # Add the random value to the encrypt string
-            print(hold_var)
-            message_encrypt += str(hold_var)
+            message_encrypt += hold_var
     
     print("\nOriginal Message: " + msg)
     print("\nEncrypted Message: " + message_encrypt)
+
 
 def homophone_decrypt():
     
@@ -93,7 +95,7 @@ def homophone_decrypt():
                 # Append the values in the header to their corresponding row
                 row.append(msg[position:position+2])
                 position += 2
-                
+
         return keys_copy
 
     
@@ -102,9 +104,10 @@ def homophone_decrypt():
 
     keys_modified = read_header(msg)
     keys_modified_length = 0
-    
+
+    # Get the length of the header
     for row in keys_modified:
-        keys_modified_length += len(row)
+        keys_modified_length += len("".join(row))
     
     # Loop through the message 2 letters at a time
     for i in range(keys_modified_length, len(msg), 2):
@@ -116,6 +119,7 @@ def homophone_decrypt():
     
     print("\nOriginal Message: " + msg)
     print("\nDecrypted Message: " + message_decrypt)
+
 
 # Main function -- gets the mode from the user and calls encrypt or decrypt
 def homophone_cipher():
@@ -129,11 +133,11 @@ def homophone_cipher():
     else:
         homophone_decrypt()
 
+
 ## -- Main --
 
 print("Welcome to the Homophone Cipher Program!")
 
-# Create the key list for this session
 run = ""
 while run != "q":
     homophone_cipher()
