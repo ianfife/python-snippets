@@ -21,10 +21,10 @@ def vigenere_cipher():
         mode = input("\nInvalid Input -- Choose [e] encrypt or [d] decrypt: ").lower()
 
     #Get message from the user:
-    message = input("\nEnter Message: ")
+    message = input("\nEnter Message: ").lower()
 
     # Get key word from the user:
-    key_word = input("\nEnter Key Word: ")
+    key_word = input("\nEnter Key Word: ").lower()
 
     # Process each character and append to translated text
     key_word_index = 0
