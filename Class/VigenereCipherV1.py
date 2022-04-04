@@ -32,7 +32,7 @@ def vigenere_cipher():
         if ch in symbols:
             pos = symbols.index(ch) # find the index value in symbols
             if mode == 'e':
-                pos += symbols.index(key_word[key_word_index % len(key_word)])    # Add the key word to encrypt
+                pos += symbols.index(key_word[key_word_index % len(key_word)])  # Add the key word to encrypt
                 while pos >= len(symbols):  # Adjust for wrapping
                     pos -= len(symbols)
                     
