@@ -5,47 +5,30 @@
 # This program encrypts and decrypts messages using the vigenere cipher.
 # Messages are encrypted and decrypted using a lookup table.
 
-# By creating the vars here, they are 'global' in the program.
-# However, make sure your functions pass information in and out
-# using arguments / parameters.
 
-lookupTable = [[]]  # 2-D array for Vigenere Square
-tableVar = ""       # a char in the table
-
-keyWord = ""        # the keyword or keyphrase used to encrypt
-keyWordList = ""    # keyword REPEATED to length of plainText
-keyLetter = ""      # a char in the keyWordList
-
-plainText = ""      # the message string to be encrypted
-textLetter = ""     # a char in the message
-
-cipherText = ""     # encrypted text string
-cipherLetter = ""   # a char in the cipherText
-
-letterIndex = ""    # contains 'a' ....'z'
-letter = ""         # a char in the letterIndex
-
+lookup_table = [[]]  # 2-D array for Vigenere Squaree
 symbols = 'abcdefghijklmnopqrstuvwxyz'
 
-def createTable():
-    symbols = 'abcdefghijklmnopqrstuvwxyz'
-    for i in range(len(symbols)):
-        for char in symbols:
-            lookupTable[i].append(char)
-        symbols = symbols[1:len(symbols)] + symbols[0]
-        lookupTable.append([])
-
-def createKeyWordList(keyWord, plainText):
-    keyWordIndex = 0
-    keyWordList = ""
+def create_table():
+    table_symbols = 'abcdefghijklmnopqrstuvwxyz'
+    for i in range(len(table_symbols)):
+        for char in table_symbols:
+            lookup_table[i].append(char)
+        table_symbols = table_symbols[1:len(table_symbols)] + table_symbols[0]
+        if i < len(table_symbols) - 1:
+            lookup_table.append([])
     
-    for char in plainText:
+def create_key_word_list(key_word, plain_text):
+    key_word_index = 0
+    key_word_list = ""
+    
+    for char in plain_text:
         if char in symbols:
-            keyWordList += keyWord[keyWordIndex % len(keyWord)]
-            keyWordIndex += 1
-    return keyWordList
+            key_word_list += key_word[key_word_index % len(key_word)]
+            key_word_index += 1
+    return key_word_list
 
-def vigenereCipher():
+def vigenere_cipher():
     # Get mode from the user: 
     mode = input("\nChoose [e] encrypt or [d] decrypt: ").lower()
 
@@ -53,50 +36,53 @@ def vigenereCipher():
         mode = input("\nInvalid Input -- Choose [e] encrypt or [d] decrypt: ").lower()
 
     # Get message from the user:
-    plainText = input("\nEnter Message: ").lower()
+    plain_text = input("\nEnter Message: ").lower()
 
     # Get key word from the user:
-    keyWord = input("\nEnter Key Word: ").lower()
+    key_word = input("\nEnter Key Word: ").lower()
 
-    keyWordList = createKeyWordList(keyWord, plainText)
+    key_word_list = create_key_word_list(key_word, plain_text)
     
     if mode == 'e':
-        print("\nYour encrypted message is: " + encrypt(keyWordList, plainText))
+        print("\nYour encrypted message is: " + encrypt(key_word_list, plain_text))
     else:
-        print("\nYour decrypted messahe is: " + decrypt(keyWordList, plainText))
+        print("\nYour decrypted message is: " + decrypt(key_word_list, plain_text))
 
-def encrypt(keyWordList, plainText):
-    cipherText = ""
-    keyWordIndex = 0
+def encrypt(key_word_list, plain_text):
+    cipher_text = ""
+    key_word_index = 0
     
-    for char in plainText:
+    for char in plain_text:
         if char in symbols:
-            cipherText += lookupTable[symbols.index(char)][symbols.index(keyWordList[keyWordIndex])]
-            keyWordIndex += 1
+            cipher_text += lookup_table[symbols.index(char)][symbols.index(key_word_list[key_word_index])]
+            print(symbols.index(char))
+            print(symbols.index(key_word_list[key_word_index]))
+            print(lookup_table[symbols.index(char)])
+            key_word_index += 1
         else:
-            cipherText += char
+            cipher_text += char
 
-    return cipherText
+    return cipher_text
 
-def decrypt(keyWordList, cipherText):
-    plainText = ""
-    keyWordIndex = 0
+def decrypt(key_word_list, cipher_text):
+    plain_text = ""
+    key_word_index = 0
     
-    for char in cipherText:
+    for char in cipher_text:
         if char in symbols:
-            textLetter = findRowVal(keyWordList[keyWordIndex])
-            keyWordIndex += 1
-            plainText += textLetter
+            textLetter = find_row_val(key_word_list[key_word_index], char)
+            key_word_index += 1
+            plain_text += textLetter
         else:
-            plainText += char
-    return plainText
+            plain_text += char
+    return plain_text
 
-def findRowVal(keyLetter, textLetter):
-    returnLetter
-    for char in lookupTable[symbols.index(keyLetter)]:
-        if char == textLetter:
-            returnLetter = symbols[lookupTable[symbols.index(keyLetter)].index(char)]
-    return returnLetter
+def find_row_val(key_letter, text_letter):
+    return_letter = ""
+    for char in lookup_table[symbols.index(key_letter)]:
+        if char == text_letter:
+            return_letter = symbols[lookup_table[symbols.index(key_letter)].index(char)]
+    return return_letter
 
 # -------------------------------------------------------
 
@@ -104,12 +90,14 @@ def findRowVal(keyLetter, textLetter):
 
 print("Welcome to the Vigenere Cipher Program!")
 
-createTable()
+create_table()
 
 choice = ''
 while choice != 'q':
-    vigenereCipher()
+    vigenere_cipher()
     print("---------------------------------------")
     choice = input("Press ENTER to continue, 'q' to quit: ")
     print("---------------------------------------")
+
 print("\nThanks for using the Vigenere Cipher Program!")
+end = input()
