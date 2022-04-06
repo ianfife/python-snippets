@@ -14,13 +14,13 @@ def vigenere_cipher():
     # Create the symbol set
     symbols = 'abcdefghijklmnopqrstuvwxyz'
     
-    #Get mode from the user: 
+    # Get mode from the user: 
     mode = input("\nChoose [e] encrypt or [d] decrypt: ").lower()
 
     while mode not in ['e', 'd']:
         mode = input("\nInvalid Input -- Choose [e] encrypt or [d] decrypt: ").lower()
 
-    #Get message from the user:
+    # Get message from the user:
     message = input("\nEnter Message: ").lower()
 
     # Get key word from the user:
