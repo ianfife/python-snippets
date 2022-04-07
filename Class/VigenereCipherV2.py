@@ -14,8 +14,12 @@ def create_table():
     for i in range(len(table_symbols)):
         for char in table_symbols:
             lookup_table[i].append(char)
+        
+        # Move first char to the back on the string
         table_symbols = table_symbols[1:len(table_symbols)] + table_symbols[0]
+        
         if i < len(table_symbols) - 1:
+            # Add a new row to the 2d array
             lookup_table.append([])
     
 def create_key_word_list(key_word, plain_text):
@@ -23,6 +27,8 @@ def create_key_word_list(key_word, plain_text):
     key_word_list = ""
     
     for char in plain_text:
+        # Only add on to the key word list if
+        # the character is a supported character
         if char in symbols:
             key_word_list += key_word[key_word_index % len(key_word)]
             key_word_index += 1
@@ -41,6 +47,7 @@ def vigenere_cipher():
     # Get key word from the user:
     key_word = input("\nEnter Key Word: ").lower()
 
+    # Create the string containing the key word repeated
     key_word_list = create_key_word_list(key_word, plain_text)
     
     if mode == 'e':
@@ -54,11 +61,11 @@ def encrypt(key_word_list, plain_text):
     
     for char in plain_text:
         if char in symbols:
+            # Look up the value from the 2d array using index values
+            # from the text and the key word list
             cipher_text += lookup_table[symbols.index(char)][symbols.index(key_word_list[key_word_index])]
-            print(symbols.index(char))
-            print(symbols.index(key_word_list[key_word_index]))
-            print(lookup_table[symbols.index(char)])
             key_word_index += 1
+        # Unsupported characters
         else:
             cipher_text += char
 
@@ -70,15 +77,20 @@ def decrypt(key_word_list, cipher_text):
     
     for char in cipher_text:
         if char in symbols:
+            # Use the find_row_val function to
+            # grab the char relative to the cipher character
             textLetter = find_row_val(key_word_list[key_word_index], char)
             key_word_index += 1
             plain_text += textLetter
+        # Unsupported characters
         else:
             plain_text += char
     return plain_text
 
 def find_row_val(key_letter, text_letter):
     return_letter = ""
+    # Loop through the list in the 2d array
+    # until we find the character
     for char in lookup_table[symbols.index(key_letter)]:
         if char == text_letter:
             return_letter = symbols[lookup_table[symbols.index(key_letter)].index(char)]
